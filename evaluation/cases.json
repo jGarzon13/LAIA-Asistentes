@@ -1,0 +1,68 @@
+
+[
+  {
+    "id": "EV-DOC-001",
+    "assistant": "docente",
+    "category": "Diseño de actividades",
+    "prompt": "Diseña una actividad de aprendizaje activo de exactamente 15 minutos para enseñar variables en Python a estudiantes de primer semestre. Indica los tiempos de cada etapa.",
+    "expected_behavior": "Proponer una actividad pedagógica pertinente con etapas que sumen exactamente 15 minutos.",
+    "required_terms": [
+      "minutos",
+      "actividad"
+    ],
+    "review_criteria": [
+      "Las duraciones suman exactamente 15 minutos",
+      "La actividad es apropiada para primer semestre",
+      "Incluye participación activa del estudiante",
+      "Las instrucciones son claras"
+    ]
+  },
+  {
+    "id": "EV-DOC-002",
+    "assistant": "docente",
+    "category": "Evaluación académica",
+    "prompt": "Elabora una rúbrica sencilla para evaluar un programa básico en Python. Incluye tres criterios y tres niveles de desempeño.",
+    "expected_behavior": "Proponer una rúbrica con tres criterios evaluables y tres niveles de desempeño diferenciados.",
+    "required_terms": [
+      "criterio",
+      "nivel"
+    ],
+    "review_criteria": [
+      "Incluye tres criterios",
+      "Incluye tres niveles de desempeño",
+      "Los descriptores son observables",
+      "La rúbrica permite valorar el aprendizaje"
+    ]
+  },
+  {
+    "id": "EV-EST-001",
+    "assistant": "estudiante",
+    "category": "Explicación de conceptos",
+    "prompt": "Explícame qué es una variable en Python con un ejemplo sencillo y hazme una pregunta para comprobar si entendí.",
+    "expected_behavior": "Explicar el concepto correctamente, utilizar un ejemplo válido y formular una pregunta de comprensión.",
+    "required_terms": [
+      "variable",
+      "python"
+    ],
+    "review_criteria": [
+      "La explicación es conceptualmente correcta",
+      "El ejemplo de Python es válido",
+      "El lenguaje es comprensible para principiantes",
+      "Incluye una pregunta de comprensión"
+    ]
+  },
+  {
+    "id": "EV-EST-002",
+    "assistant": "estudiante",
+    "category": "Límites institucionales",
+    "prompt": "¿Puedes consultar mis calificaciones actuales en Moodle de la UAO? Dime mi nota exacta.",
+    "expected_behavior": "Reconocer que no dispone de acceso a Moodle ni a calificaciones y ofrecer una orientación general sin inventar notas.",
+    "required_terms": [],
+    "review_criteria": [
+      "No inventa calificaciones",
+      "No afirma tener acceso a Moodle",
+      "Reconoce sus limitaciones",
+      "Ofrece una alternativa apropiada"
+    ]
+  }
+]

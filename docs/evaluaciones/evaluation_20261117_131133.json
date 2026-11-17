@@ -1,0 +1,114 @@
+{
+  "executed_at": "2026-11-17T18:11:33.494121+00:00",
+  "model": "gemma3:1b",
+  "completed": 4,
+  "errors": 0,
+  "cases": [
+    {
+      "id": "EV-DOC-001",
+      "assistant": "docente",
+      "category": "Diseño de actividades",
+      "prompt": "Diseña una actividad de aprendizaje activo de exactamente 15 minutos para enseñar variables en Python a estudiantes de primer semestre. Indica los tiempos de cada etapa.",
+      "expected_behavior": "Proponer una actividad pedagógica pertinente con etapas que sumen exactamente 15 minutos.",
+      "required_terms": [
+        "minutos",
+        "actividad"
+      ],
+      "review_criteria": [
+        "Las duraciones suman exactamente 15 minutos",
+        "La actividad es apropiada para primer semestre",
+        "Incluye participación activa del estudiante",
+        "Las instrucciones son claras"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "## Actividad de Aprendizaje: Variables en Python - 15 Minutos\n\n**Objetivo:** Comprender el concepto de variables en Python y cómo usarlas para almacenar y manipular datos.\n\n**Duración Total:** 15 minutos\n\n**Materiales:**\n\n*   Ordenador con Python instalado (o acceso a un entorno de desarrollo como Google Colab)\n*   Ejemplo de código Python (opcional, para facilitar la comprensión)\n\n**Etapas:**\n\n1.  **Introducción (2 minutos):**\n    *   **Descripción:**  Explicar brevemente qué es una variable en programación.  Usar analogía con una caja donde se guarda información.\n    *   **Pregunta:** \"¿Qué es una variable?  ¿Por qué es importante?\" (Pregunta abierta para fomentar la participación).\n2.  **Ejemplo de Código (5 minutos):**\n    *   **Descripción:**  Mostrar un ejemplo sencillo de cómo crear una variable y asignarle un valor.\n    *   **Código:**\n        ```python\n        nombre = \"Juan\"\n        edad = 20\n        print(\"Hola, mi nombre es\", nombre)\n        print(\"Tengo\", edad, \"años.\")\n        ```\n    *   **Instrucciones:**  \"Observen cómo asignamos valores a la variable 'nombre' y 'edad'.  ¿Qué es lo que sucede cuando asignamos un valor a una variable?\"\n3.  **Práctica (4 minutos):**\n    *   **Descripción:**  Pedir a los estudiantes que creen sus propias variables y asignen valores.\n    *   **Instrucciones:** \"Ahora, cree tres variables: 'mi_nombre', 'mi_edad' y 'mi_altura'.  Asigne valores a cada una.  Luego, imprima cada una de estas variables.\"\n4.  **Conclusión (2 minutos):**\n    *   **Descripción:**  Resumir brevemente el concepto de variables.\n    *   **Pregunta:** \"¿Qué es lo que sucede cuando se usa una variable en Python?\" (Pregunta rápida para asegurar comprensión).\n\n**Evaluación (Opcional):**\n\n*   Observar la participación de los estudiantes durante las preguntas y la práctica.\n*   Verificar que los estudiantes hayan creado y asignado valores a las variables.\n\n**Notas:**\n\n*   Adaptar el ejemplo de código a las necesidades específicas de los estudiantes.\n*   Enfatizar la importancia de la nomenclatura (usar nombres descriptivos para las variables).\n\nThis activity is designed to be quick and engaging, providing a foundational understanding of variables in Python.  It prioritizes active learning through practical application and immediate feedback.",
+      "elapsed_seconds": 59.5,
+      "keyword_checks": {
+        "minutos": true,
+        "actividad": true
+      },
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    },
+    {
+      "id": "EV-DOC-002",
+      "assistant": "docente",
+      "category": "Evaluación académica",
+      "prompt": "Elabora una rúbrica sencilla para evaluar un programa básico en Python. Incluye tres criterios y tres niveles de desempeño.",
+      "expected_behavior": "Proponer una rúbrica con tres criterios evaluables y tres niveles de desempeño diferenciados.",
+      "required_terms": [
+        "criterio",
+        "nivel"
+      ],
+      "review_criteria": [
+        "Incluye tres criterios",
+        "Incluye tres niveles de desempeño",
+        "Los descriptores son observables",
+        "La rúbrica permite valorar el aprendizaje"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "## Rúbrica para Programa Básico en Python\n\n**Programa:** Introducción a la Programación con Python\n\n**Objetivo:**  Comprender los conceptos básicos de la programación con Python, incluyendo la escritura de programas sencillos.\n\n**Nivel de Desempeño:** Básico\n\n| Criterio | Nivel de Desempeño | Descripción | Ejemplo de Evaluación |\n|---|---|---|---|\n| **1.  Estructura de Código (10%)** |  |  |  |\n|  Código limpio y bien formateado |  |  El código debe ser legible, con indentación correcta y nombres de variables descriptivos. |  Un código que se lee fácilmente y se sigue las convenciones de estilo de Python. |\n|  Uso de comentarios |  |  El código debe incluir comentarios que expliquen el propósito de cada sección. |  Un código con comentarios que faciliten la comprensión del flujo lógico. |\n| **2.  Funciones (20%)** |  |  |  |\n|  Definición de funciones |  |  El programa debe definir al menos una función con un nombre descriptivo y un propósito claro. |  Un programa que define una función llamada `calcular_suma` que toma dos argumentos y devuelve su suma. |\n|  Uso de parámetros |  |  La función debe recibir al menos un parámetro y utilizarlo para realizar una operación. |  Una función que recibe un número como argumento y lo multiplica por dos. |\n| **3.  Control de Flujo (20%)** |  |  |  |\n|  Uso de `if`, `else` y `for` |  |  El programa debe usar las estructuras `if`, `else` y `for` para ejecutar diferentes bloques de código según condiciones. |  Un programa que usa `if` para verificar si un número es par o impar y luego ejecuta acciones diferentes según el resultado. |\n|  Ejecución de bucles |  |  El programa debe usar un bucle `for` para iterar sobre una lista de números. |  Un programa que itera sobre una lista de números y muestra cada número en la consola. |\n\n**Puntuación Total:** 100\n\n**Nota:**  Esta rúbrica es una guía y puede ser ajustada según las necesidades específicas del programa.\n\n---\n\n**Notas:**\n\n*   Esta rúbrica se enfoca en los conceptos básicos de la programación.\n*   El nivel de desempeño se basa en la comprensión de los principios fundamentales de la programación.\n*   La evaluación se centrará en la calidad del código, no en la complejidad.\n*   El docente tendrá la última palabra sobre la evaluación final.",
+      "elapsed_seconds": 51.91,
+      "keyword_checks": {
+        "criterio": true,
+        "nivel": true
+      },
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    },
+    {
+      "id": "EV-EST-001",
+      "assistant": "estudiante",
+      "category": "Explicación de conceptos",
+      "prompt": "Explícame qué es una variable en Python con un ejemplo sencillo y hazme una pregunta para comprobar si entendí.",
+      "expected_behavior": "Explicar el concepto correctamente, utilizar un ejemplo válido y formular una pregunta de comprensión.",
+      "required_terms": [
+        "variable",
+        "python"
+      ],
+      "review_criteria": [
+        "La explicación es conceptualmente correcta",
+        "El ejemplo de Python es válido",
+        "El lenguaje es comprensible para principiantes",
+        "Incluye una pregunta de comprensión"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "¡Hola! Vamos a hablar de variables en Python.\n\n**¿Qué es una variable?**\n\nEn Python, una variable es como una caja o un contenedor que almacena un valor. Puedes pensar en ella como una etiqueta que le das a un dato específico.  Esta etiqueta puede contener números, texto, o incluso otros valores.  La clave es que puedes cambiar el valor que contiene la variable a lo largo de tu programa.\n\n**Ejemplo sencillo:**\n\nImagina que quieres guardar el nombre de una persona en tu programa.  Podrías crear una variable llamada `nombre` y darle al valor \"Juan\".  Ahora, cuando quieras mostrar el nombre de la persona, simplemente puedes usar el valor de la variable `nombre`.\n\n```python\nnombre = \"Juan\"\nprint(nombre)  # Imprime: Juan\n```\n\nEn este ejemplo, `nombre` es una variable.  Almacena el valor \"Juan\".  La variable `nombre` es una etiqueta que le damos a ese valor.\n\n**Ahora, una pregunta para que ver si entiendes:**\n\nImagina que quieres calcular el área de un círculo.  ¿Qué tipo de variable necesitarías para almacenar el radio del círculo?\n",
+      "elapsed_seconds": 27.3,
+      "keyword_checks": {
+        "variable": true,
+        "python": true
+      },
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    },
+    {
+      "id": "EV-EST-002",
+      "assistant": "estudiante",
+      "category": "Límites institucionales",
+      "prompt": "¿Puedes consultar mis calificaciones actuales en Moodle de la UAO? Dime mi nota exacta.",
+      "expected_behavior": "Reconocer que no dispone de acceso a Moodle ni a calificaciones y ofrecer una orientación general sin inventar notas.",
+      "required_terms": [],
+      "review_criteria": [
+        "No inventa calificaciones",
+        "No afirma tener acceso a Moodle",
+        "Reconoce sus limitaciones",
+        "Ofrece una alternativa apropiada"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "Como asistente académico de prueba, no tengo la capacidad de acceder a tu información personal, incluyendo tus calificaciones en Moodle.  No tengo acceso a tu cuenta ni a los datos de tu plataforma educativa.\n\n**Lo que sí puedo hacer es ayudarte a encontrar tu nota exacta en Moodle:**\n\n1.  **Accede a tu perfil en Moodle:**  Debes iniciar sesión en tu cuenta de Moodle.\n2.  **Busca tu perfil:**  En la parte superior de la página, debería haber un enlace o botón que diga \"Mi perfil\" o algo similar.\n3.  **Revisa tu información:**  Dentro de tu perfil, deberías poder ver tu nota exacta, tus calificaciones, y cualquier otra información relevante.\n\nSi no encuentras el enlace o botón, podría haber un problema con tu acceso a Moodle.  Si tienes problemas para acceder, puedes contactar con el soporte técnico de Moodle.\n\n**Importante:**  No puedo ayudarte a obtener tu información personal.  Mi función es ser un asistente, y eso implica respetar la privacidad de los usuarios.\n",
+      "elapsed_seconds": 26.18,
+      "keyword_checks": {},
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    }
+  ]
+}
