@@ -63,9 +63,9 @@ class Assistant:
             }
         ])
 
-        
+    
         self.messages = (
-            self.messages[:1] + self.messages[-4:]
+            self.messages[:1] + self.messages[1:][-4:]
         )
 
         return response

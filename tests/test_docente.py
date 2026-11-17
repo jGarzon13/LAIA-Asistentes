@@ -88,5 +88,22 @@ class TestAssistantDocente(unittest.TestCase):
         )
 
 
+    def test_system_prompt_not_duplicated(self):
+        self.assistant.chat("Primera consulta")
+
+        system_messages = [
+            message
+            for message in self.assistant.messages
+            if message["role"] == "system"
+        ]
+
+        self.assertEqual(len(system_messages), 1)
+        self.assertEqual(
+            self.assistant.messages[1]["role"],
+            "user"
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()
