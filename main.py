@@ -10,13 +10,13 @@ BASE_DIR = Path(__file__).resolve().parent
 
 def run_chat(assistant: Assistant):
     print(f"\n--- {assistant.name} ---")
-    print("Escribe /salir para volver al menú.")
+    print("Comandos: /salir, /exit, /back → volver al menú.")
     print("Escribe /reiniciar para borrar el contexto.\n")
 
     while True:
         message = input("Tú: ").strip()
 
-        if message.lower() == "/salir":
+        if message.lower() in( "/salir", "/exit", "break"):
             break
 
         if message.lower() == "/reiniciar":
