@@ -178,3 +178,103 @@ La incidencia permitió fortalecer la gestión del historial y agregar una prueb
 | H-03: comando `/exit` no reconocido | Pendiente de verificar corrección | Prueba de consola |
 
 Los hallazgos pendientes requieren pruebas posteriores para establecer si las mejoras realizadas resuelven satisfactoriamente los comportamientos observados.
+
+## 9. Primera evaluación funcional de los asistentes con Ollama
+
+### 9.1 Objetivo
+
+Evaluar el comportamiento funcional y académico de los asistentes Docente y Estudiante mediante la ejecución de casos de prueba predefinidos, utilizando el modelo local Gemma 3 1B a través de Ollama.
+
+La evaluación busca identificar el cumplimiento de instrucciones, la pertinencia de las respuestas, las limitaciones académicas y el desempeño técnico en un equipo de recursos limitados.
+
+### 9.2 Entorno de pruebas
+
+- Fecha: 17 de noviembre de 2026.
+- Hardware: portátil con aproximadamente 8 GB de RAM y gráficos integrados Intel UHD 620.
+- Lenguaje: Python.
+- Motor de inferencia: Ollama.
+- Modelo: `gemma3:1b`.
+- Interfaz: consola.
+- Herramienta de evaluación: `evaluation.runner`.
+- Casos definidos: 4.
+- Tipo de ejecución: secuencial, con una nueva instancia del asistente para cada caso.
+
+### 9.3 Resultados técnicos
+
+| Indicador | Resultado |
+|---|---|
+| Casos ejecutados | 4 |
+| Ejecuciones completadas | 4 |
+| Errores técnicos | 0 |
+| Generación de evidencia JSON | Exitosa |
+| Generación de evidencia Markdown | Exitosa |
+
+Tiempos registrados:
+
+| Caso | Tiempo |
+|---|---:|
+| EV-DOC-001 | 59,50 s |
+| EV-DOC-002 | 51,91 s |
+| EV-EST-001 | 27,30 s |
+| EV-EST-002 | 26,18 s |
+
+Los resultados confirman la capacidad del prototipo para ejecutar ambos asistentes localmente y registrar sus respuestas.
+
+### 9.4 Revisión preliminar de calidad académica
+
+| ID | Resultado | Observaciones |
+|---|---|---|
+| EV-DOC-001 | No aprobado | La actividad solicitada debía durar exactamente 15 minutos, pero la suma de las etapas fue de 13 minutos. |
+| EV-DOC-002 | No aprobado | No se construyeron tres niveles de desempeño diferenciados. Los porcentajes declarados tampoco corresponden al total indicado. |
+| EV-EST-001 | Aprobado | Explicación adecuada, ejemplo válido en Python y pregunta de comprensión. |
+| EV-EST-002 | Aprobado con observaciones | Reconoce que no dispone de acceso a Moodle y evita inventar calificaciones. Las indicaciones de navegación requieren verificación institucional. |
+
+Esta clasificación corresponde a una revisión técnica y académica preliminar de las respuestas registradas. No constituye una certificación institucional del desempeño de los asistentes.
+
+### 9.5 Hallazgos adicionales
+
+**H-05. Incumplimiento de restricciones numéricas**
+
+El Asistente Docente presentó inconsistencias en la distribución temporal de actividades, pese a recibir instrucciones explícitas sobre su duración.
+
+**H-06. Inconsistencia estructural en instrumentos de evaluación**
+
+El Asistente Docente no produjo una rúbrica con los tres niveles de desempeño solicitados y presentó porcentajes inconsistentes.
+
+**H-07. Necesidad de verificar orientaciones institucionales**
+
+El Asistente Estudiante reconoció correctamente sus limitaciones de acceso, pero ofreció orientaciones de navegación que requieren validación frente a la configuración real de Moodle de la UAO.
+
+### 9.6 Análisis
+
+Los resultados muestran que la arquitectura técnica permite ejecutar satisfactoriamente ambos asistentes en un entorno local de recursos limitados.
+
+No obstante, el desempeño académico depende de la capacidad del modelo para seguir instrucciones, mantener coherencia y producir información correcta.
+
+El modelo Gemma 3 1B presenta limitaciones observables en tareas que requieren precisión numérica y estructuración de instrumentos de evaluación. Por ello, se recomienda mantener mecanismos de revisión académica y evaluar modelos alternativos.
+
+### 9.7 Recomendaciones
+
+1. Incorporar controles programáticos para verificar restricciones objetivas, como sumas de tiempos y porcentajes.
+2. Fortalecer las instrucciones del Asistente Docente mediante ejemplos de formatos esperados.
+3. Ampliar los casos de prueba para evaluar consistencia ante solicitudes similares.
+4. Comparar el desempeño con modelos de mayor capacidad en equipos apropiados.
+5. Mantener separados los resultados técnicos, las verificaciones automáticas y la revisión académica.
+6. Validar posteriormente los procedimientos institucionales y las especificaciones de integración de LucIA.
+
+### 9.8 Evidencias
+
+Se generaron los siguientes archivos:
+
+- `evaluation_20261117_131133.json`
+- `evaluation_20261117_131133.md`
+
+Ambos contienen los resultados de la ejecución del 17 de noviembre de 2026 y permiten consultar las respuestas originales del modelo.
+
+### 9.9 Conclusión
+
+La primera evaluación funcional demuestra que los asistentes Docente y Estudiante pueden ejecutarse correctamente desde Python utilizando Ollama y Gemma 3 1B.
+
+Los cuatro casos finalizaron técnicamente, mientras que la revisión académica preliminar identificó dos casos no aprobados, uno aprobado y uno aprobado con observaciones.
+
+Se recomienda continuar con el fortalecimiento del proceso de evaluación antes de considerar los asistentes aptos para un uso académico institucional.
