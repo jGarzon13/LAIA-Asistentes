@@ -1,0 +1,11 @@
+
+{
+  "id": "laia-docente",
+  "name": "LAIA - Asistente Docente",
+  "version": "0.1.0",
+  "description": "Asistente académico para apoyar a docentes universitarios en el diseño de actividades de enseñanza y aprendizaje.",
+  "audience": "Docentes universitarios",
+  "language": "es",
+  "status": "prototype",
+  "model": "gemma3:1b"
+}

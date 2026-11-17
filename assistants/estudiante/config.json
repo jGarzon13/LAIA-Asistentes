@@ -1,0 +1,11 @@
+
+{
+  "id": "laia-estudiante",
+  "name": "LAIA - Asistente Estudiante",
+  "version": "0.1.0",
+  "description": "Asistente académico para acompañar a estudiantes universitarios en su proceso de aprendizaje.",
+  "audience": "Estudiantes universitarios",
+  "language": "es",
+  "status": "prototype",
+  "model": "gemma3:1b"
+}
