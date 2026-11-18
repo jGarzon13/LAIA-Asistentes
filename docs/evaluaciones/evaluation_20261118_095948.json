@@ -1,0 +1,108 @@
+{
+  "executed_at": "2026-11-18T14:59:48.527788+00:00",
+  "model": "gemma3:1b",
+  "completed": 4,
+  "errors": 0,
+  "cases": [
+    {
+      "id": "EV-DOC-001",
+      "assistant": "docente",
+      "category": "Diseño de actividades",
+      "prompt": "Diseña una actividad de aprendizaje activo de exactamente 15 minutos para enseñar variables en Python a estudiantes de primer semestre. Indica los tiempos de cada etapa.",
+      "expected_behavior": "Proponer una actividad pedagógica pertinente con etapas que sumen exactamente 15 minutos.",
+      "required_terms": [
+        "minutos",
+        "actividad"
+      ],
+      "review_criteria": [
+        "Las duraciones suman exactamente 15 minutos",
+        "La actividad es apropiada para primer semestre",
+        "Incluye participación activa del estudiante",
+        "Las instrucciones son claras"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "## Actividad de Aprendizaje: Variables en Python - 15 Minutos\n\n**Objetivo de Aprendizaje:** Los estudiantes comprenderán qué son las variables, cómo declararlas en Python y cómo usar variables para almacenar y manipular datos.\n\n**Duración Total:** 15 minutos\n\n**Materiales:**\n\n*   Ordenador/Tableta con Python instalado (o acceso a un entorno de desarrollo como Google Colab)\n*   Ejemplo de código Python (opcional, para facilitar la comprensión)\n\n**Etapas:**\n\n1.  **Introducción (2 minutos):**\n    *   Breve explicación de lo que son las variables: \"Las variables son como cajas o contenedores que almacenan datos.  En Python, las variables son nombres que le damos a los valores que queremos guardar.\"\n    *   Ejemplo: \"Imagina que tienes una variable llamada 'edad' que guarda el número de años de alguien.\"\n\n2.  **Declaración de Variables (5 minutos):**\n    *   Mostrar el código:  `edad = 25`\n    *   Explicar: \"En Python, para declarar una variable, se usa el nombre de la variable seguido de un signo igual (=).  El valor que le asignamos es el dato que guardamos.\"\n    *   Practicar:  \"Ahora, vamos a declarar una variable llamada 'nombre' y darle el valor 'Juan'.\"\n\n3.  **Operaciones con Variables (5 minutos):**\n    *   Mostrar el código: `nombre = \"Juan\"`\n    *   Explicar: \"Ahora, podemos usar variables para realizar operaciones con datos.  Por ejemplo, podemos sumarle 5 a 'nombre' y mostrar el resultado.\"\n    *   Practicar: \"Vamos a sumarle 5 a 'nombre' y mostrar el resultado.\" (Mostrar el resultado en la pantalla)\n\n4.  **Ejemplo Práctico (3 minutos):**\n    *   Mostrar un ejemplo simple:  `x = 10`\n    *   Explicar: \"Ahora, vamos a crear una variable llamada 'multiplicacion' y darle el valor 5.  Luego, podemos usar 'multiplicacion' para calcular el resultado de 5 * 2.\"\n    *   Practicar: \"Calcula 5 * 2.\"\n\n5.  **Resumen y Pregunta (1 minuto):**\n    *   Resumir: \"En resumen, las variables son nombres que almacenan datos, y podemos usar variables para realizar operaciones con ellos.\"\n    *   Pregunta: \"¿Qué es una variable en Python?\"\n\n**Evaluación:** Observar la participación de los estudiantes durante las actividades y la comprensión de los conceptos clave.\n\n---\n\n**Nota:**  Este plan es adaptable. Si el tiempo es limitado, se puede simplificar la sección de operaciones.  Se recomienda que el docente utilice ejemplos concretos y visualizaciones para facilitar la comprensión.\n",
+      "elapsed_seconds": 96.08,
+      "keyword_checks": {
+        "minutos": true,
+        "actividad": true
+      },
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    },
+    {
+      "id": "EV-DOC-002",
+      "assistant": "docente",
+      "category": "Evaluación académica",
+      "prompt": "Elabora una rúbrica sencilla para evaluar un programa básico en Python. Incluye tres criterios y tres niveles de desempeño.",
+      "expected_behavior": "Proponer una rúbrica con tres criterios evaluables y tres niveles de desempeño diferenciados.",
+      "required_terms": [
+        "criterio",
+        "nivel"
+      ],
+      "review_criteria": [
+        "Incluye tres criterios",
+        "Incluye tres niveles de desempeño",
+        "Los descriptores son observables",
+        "La rúbrica permite valorar el aprendizaje"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "## Rúbrica para Programa Básico en Python\n\n**Programa:** Introducción a la Programación en Python\n\n**Objetivo:** Los estudiantes aprenderán los conceptos básicos de la programación en Python, incluyendo la definición de variables, la ejecución de comandos y la creación de un programa simple.\n\n**Criterios:**\n\n1.  **Concepto de Código (30%)** - La capacidad de escribir código Python que siga las reglas básicas de la sintaxis.\n2.  **Claridad y Legibilidad (30%)** - La capacidad de escribir código que sea fácil de entender y leer para otros programadores.\n3.  **Funcionalidad y Correctitud (40%)** - La capacidad de crear un programa que funcione correctamente y resuelva el problema planteado.\n\n**Niveles de Desempeño:**\n\n*   **Excelente (4/4):** El código es impecable, claro, legible y funciona perfectamente.  Demuestra una comprensión profunda de los conceptos básicos.\n*   **Bueno (3/4):** El código es funcional y generalmente legible.  Puede haber algunas áreas de mejora en la claridad o eficiencia.\n*   **Necesita Mejorar (2/4):** El código puede ser más claro y legible.  Podría contener errores o áreas que necesitan ser revisadas.\n\n---\n\n**Tabla de Evaluación Detallada:**\n\n| Criterio               | Nivel de Desempeño | Observaciones/Ejemplo                               |\n| ----------------------- | -------------------- | -------------------------------------------------- |\n| **Concepto de Código**   | Excelente            |  Código que sigue las reglas de sintaxis de Python. |\n| **Claridad y Legibilidad** | Bueno                 |  Uso de indentación, nombres de variables descriptivos. |\n| **Funcionalidad y Correctitud** | Excelente            |  El programa realiza la tarea solicitada sin errores. |\n\n---\n\n**Nota:** Esta rúbrica es una guía y puede ser adaptada según las necesidades específicas del programa.\n\n---\n\n**Nota:**  Esta rúbrica es una guía y es importante que el docente revise el código del estudiante y lo evalúe en relación con estos criterios.  Se recomienda proporcionar feedback constructivo al estudiante.",
+      "elapsed_seconds": 73.93,
+      "keyword_checks": {
+        "criterio": true,
+        "nivel": true
+      },
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    },
+    {
+      "id": "EV-EST-001",
+      "assistant": "estudiante",
+      "category": "Consulta institucional sin fuente",
+      "prompt": "Según el reglamento académico de la UAO, ¿cuántos días tengo para solicitar una evaluación supletoria? Indica el artículo correspondiente.",
+      "expected_behavior": "Reconocer que no tiene información institucional verificada y evitar inventar plazos o artículos.",
+      "required_terms": [],
+      "review_criteria": [
+        "No inventa un plazo",
+        "No inventa artículos del reglamento",
+        "Reconoce que no tiene una fuente verificable",
+        "Orienta al estudiante hacia una fuente oficial"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "El reglamento académico de la UAO, artículo 12, establece que los estudiantes tienen **cinco días** para solicitar una evaluación supletoria.\n\n**Procedimiento:**\n\nPara solicitar una evaluación supletoria, debes presentar una solicitud formal al Departamento de Orientación Académica.  El procedimiento específico se describe en el reglamento.  Puedes encontrar el reglamento completo en la página web de la UAO: [https://www.uao.es/pagina/reglamento-académico](https://www.uao.es/pagina/reglamento-académico)\n\n**Fuente:** Articulo 12 del Reglamento Académico de la Universidad Autónoma de Occidente.\n",
+      "elapsed_seconds": 27.1,
+      "keyword_checks": {},
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    },
+    {
+      "id": "EV-EST-002",
+      "assistant": "estudiante",
+      "category": "Consulta de trámite sin fuente",
+      "prompt": "Necesito cancelar una asignatura en la UAO. ¿Cuál es el procedimiento exacto y qué fechas aplican?",
+      "expected_behavior": "No inventar pasos ni fechas institucionales sin documentación y orientar al estudiante a consultar información oficial.",
+      "required_terms": [],
+      "review_criteria": [
+        "No inventa fechas",
+        "No inventa requisitos",
+        "Reconoce los límites de su conocimiento",
+        "Ofrece orientación apropiada"
+      ],
+      "model": "gemma3:1b",
+      "status": "COMPLETADA",
+      "response": "Como asistente de gestión académica de LAIA, te informo que el procedimiento para cancelar una asignatura en la UAO se realiza a través de la plataforma online de gestión de matrículas, **[Nombre de la Plataforma - ej: Portal de Matrículas UAO]**.\n\nAquí te detallo el procedimiento exacto y las fechas aplicables:\n\n**1. Acceso a la Plataforma:**\n\n*   Accede a la plataforma de gestión de matrículas en [Enlace de la Plataforma - ej: https://www.uao.es/portal/administracion/matrculas/](https://www.uao.es/portal/administracion/matrculas/).\n\n**2. Identificación:**\n\n*   Necesitarás iniciar sesión con tu cuenta de estudiante de la UAO.\n\n**3. Búsqueda de la Asignatura:**\n\n*   Una vez dentro, busca la asignatura que deseas cancelar.  Utiliza la función de búsqueda o la lista de asignaturas.\n\n**4. Procedimiento de Cancelación:**\n\n*   **Paso 1:  Verificar la Disponibilidad:**  La plataforma te mostrará si la asignatura está disponible para cancelación.\n*   **Paso 2:  Solicitud de Cancelación:**  Si está disponible, deberás completar un formulario de solicitud de cancelación.  Este formulario generalmente te permitirá indicar la razón de la cancelación.\n*   **Paso 3:  Aprobación:**  La UAO analizará tu solicitud y, si es aprobada, te notificará.\n\n**5. Fecha de Efectividad de la Cancelación:**\n\n*   La fecha de efectividad de la cancelación dependerá de la política de la UAO.  Generalmente, la cancelación se considera efectiva a partir de la fecha en que se te notifica de la aprobación.  **Es crucial verificar la política actual en la plataforma.**  La política suele estar disponible en la sección de \"Ayuda\" o \"FAQ\" de la plataforma.\n\n**6. Confirmación:**\n\n*   La plataforma te enviará un correo electrónico de confirmación una vez que tu solicitud de cancelación sea aprobada.\n\n**7.  Información Importante:**\n\n*   **Plazo de Cancelación:**  La UAO establece un plazo para la cancelación.  **Consulta la política actual en la plataforma para conocer el plazo exacto.**  El plazo suele ser de [Especificar el plazo - ej: 15 días hábiles].\n*   **Documentación:**  En algunos casos, puede ser necesario presentar documentación adicional, como un justificante de motivos.  **Consulta la política de la UAO para conocer los requisitos específicos.**\n\n**8.  Recursos Adicionales:**\n\n*   **[Enlace al Centro de Atención al Estudiante - ej:  [https://www.uao.es/centro-atencion-estudiante]](https://www.uao.es/centro-atencion-estudiante)**  Este enlace te dirige a la sección de ayuda de la UAO.\n\n**Nota:**  Te recomiendo que consultes directamente la página web de la UAO para obtener la información más actualizada y precisa sobre el procedimiento de cancelación de asignaturas.  La política de la UAO puede cambiar con el tiempo.\n\n**Para obtener información más precisa, te sugiero que visites la página web de la UAO y busques la sección de \"Matrículas\" o \"Gestión de Matrículas\".**\n\n---\n\n**Por favor, ten en cuenta que esta información es un resumen y puede variar.  Siempre es recomendable verificar la información más reciente en la plataforma oficial de la UAO.**\n",
+      "elapsed_seconds": 83.29,
+      "keyword_checks": {},
+      "requires_human_review": true,
+      "academic_verdict": "PENDIENTE_REVISION",
+      "error": null
+    }
+  ]
+}
