@@ -43,6 +43,18 @@ class Assistant:
         if not user_message:
             raise ValueError("El mensaje no puede estar vacío.")
 
+        if (
+            self.config.get("id") == "laia-estudiante"
+             and self.config.get("knowledge", {}).get("require_sources")
+            ):
+         return (
+            "No dispongo de información institucional "
+            "verificada para responder esta consulta. "
+            "Es necesario consultar el documento o canal "
+            "oficial correspondiente."
+            )       
+
+
         conversation = self.messages + [
             {
                 "role": "user",
