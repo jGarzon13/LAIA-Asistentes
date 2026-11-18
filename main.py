@@ -3,9 +3,32 @@ from pathlib import Path
 
 from core.assistant import Assistant
 from core.models.ollama_provider import OllamaProvider
-
+from core.models.groq_provider import GroqProvider
 
 BASE_DIR = Path(__file__).resolve().parent
+
+
+def select_provider():
+    while True:
+        print("\nSelecciona el proveedor de IA:")
+        print("1. Ollama - Gemma 3 1B (local)")
+        print("2. Groq - Qwen3.8-27B (API)")
+
+        option = input("\nOpción: ").strip()
+
+        if option == "1":
+            return OllamaProvider(model="gemma3:1b")
+
+        if option == "2":
+            try:
+                return GroqProvider(
+                    model="qwen/qwen3.8-27b"
+                )
+            except RuntimeError as exc:
+                print(f"Error al configurar Groq: {exc}")
+                continue
+
+        print("Opción no válida.")
 
 
 def run_chat(assistant: Assistant):
@@ -37,7 +60,8 @@ def run_chat(assistant: Assistant):
 
 
 def main():
-    provider = OllamaProvider(model="gemma3:1b")
+    provider = select_provider()
+    
 
     assistants = {
         "1": Assistant(
