@@ -34,15 +34,22 @@ class TestAssistantEstudiante(unittest.TestCase):
             self.assistant.system_prompt
         )
 
+    
     def test_chat(self):
         response = self.assistant.chat(
-            "Explícame qué es una variable."
+            "¿Cómo cancelo una asignatura en la UAO?"
+        )
+
+        self.assertIn(
+            "No dispongo de información institucional verificada",
+            response
         )
 
         self.assertEqual(
-            response,
-            "Respuesta educativa simulada."
+            len(self.assistant.messages),
+            1
         )
+
 
     def test_independent_prompts(self):
         docente = Assistant(
@@ -55,6 +62,7 @@ class TestAssistantEstudiante(unittest.TestCase):
             self.assistant.system_prompt
         )
 
+    
     def test_chat_does_not_mix_assistants(self):
         docente = Assistant(
             ROOT / "assistants" / "docente",
@@ -62,15 +70,27 @@ class TestAssistantEstudiante(unittest.TestCase):
         )
 
         docente.chat("Actividad para docentes")
-        self.assistant.chat("Explicación para estudiantes")
 
+        response = self.assistant.chat(
+            "¿Cuál es el plazo de matrícula en la UAO?"
+        )
+
+        # El docente conserva su conversación normal
         self.assertEqual(
             docente.messages[1]["content"],
             "Actividad para docentes"
         )
+
+        # El estudiante no genera respuestas sin fuentes
+        self.assertIn(
+            "No dispongo de información institucional verificada",
+            response
+        )
+
+        # El historial del estudiante permanece independiente
         self.assertEqual(
-            self.assistant.messages[1]["content"],
-            "Explicación para estudiantes"
+            len(self.assistant.messages),
+            1
         )
 
 
@@ -119,6 +139,35 @@ class TestAssistantEstudiante(unittest.TestCase):
             "información institucional verificada",
             prompt
         )
+
+
+    def test_no_model_call_without_sources(self):
+        class TrackingProvider(ModelProvider):
+            def __init__(self):
+                self.called = False
+
+            def generate(self, messages):
+                self.called = True
+                return "Respuesta que no debería generarse."
+
+        provider = TrackingProvider()
+
+        assistant = Assistant(
+            ROOT / "assistants" / "estudiante",
+            provider
+        )
+
+        response = assistant.chat(
+            "¿Cuántos días tengo para solicitar un supletorio?"
+        )
+
+        self.assertFalse(provider.called)
+
+        self.assertIn(
+            "No dispongo de información institucional verificada",
+            response
+        )
+
 
 
 
