@@ -35,7 +35,7 @@ class GroqProvider(ModelProvider):
             "model": self.model,
             "messages": messages,
             "temperature": 0.2,
-            "max_completion_tokens": 500,
+            "max_completion_tokens": 1200,
             "stream": False
         }
 
@@ -62,6 +62,25 @@ class GroqProvider(ModelProvider):
                 result = json.load(response)
 
             content = result["choices"][0]["message"]["content"]
+
+
+            finish_reason = result["choices"][0].get("finish_reason")
+
+            usage = result.get("usage", {})
+
+            print("\n--- Métricas de Groq ---")
+            print("Tokens de entrada:", usage.get("prompt_tokens"))
+            print("Tokens de salida:", usage.get("completion_tokens"))
+            print("Tokens totales:", usage.get("total_tokens"))
+            print("Motivo de finalización:", finish_reason)
+            print("-----------------------\n")
+
+            if finish_reason == "length":
+                print(
+                    "ADVERTENCIA: La respuesta alcanzó "
+                    "el límite de tokens y podría estar incompleta."
+                )
+
 
             if not isinstance(content, str) or not content.strip():
                 raise RuntimeError(
