@@ -1,11 +1,22 @@
 
 {
   "id": "laia-estudiante",
-  "name": "LAIA - Asistente Estudiante",
-  "version": "0.1.0",
-  "description": "Asistente académico para acompañar a estudiantes universitarios en su proceso de aprendizaje.",
-  "audience": "Estudiantes universitarios",
+  "name": "LAIA - Asistente de Gestión Académica",
+  "version": "0.2.0",
+  "description": "Asistente especializado en orientación sobre reglamentos, procedimientos, trámites y documentación académica institucional de la Universidad Autónoma de Occidente.",
+  "audience": "Estudiantes de la Universidad Autónoma de Occidente",
   "language": "es",
   "status": "prototype",
-  "model": "gemma3:1b"
+  "model": "gemma3:1b",
+  "capabilities": [
+    "Consulta de documentos institucionales",
+    "Orientación sobre procedimientos académicos",
+    "Explicación de requisitos y reglamentos",
+    "Respuestas con referencias documentales"
+  ],
+  "knowledge": {
+    "type": "rag",
+    "status": "pending_implementation",
+    "require_sources": true
+  }
 }
