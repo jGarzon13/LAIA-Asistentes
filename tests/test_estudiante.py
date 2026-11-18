@@ -30,7 +30,7 @@ class TestAssistantEstudiante(unittest.TestCase):
 
     def test_load_prompt(self):
         self.assertIn(
-            "Asistente Estudiante",
+            "Asistente de Gestión Académica",
             self.assistant.system_prompt
         )
 
@@ -72,6 +72,54 @@ class TestAssistantEstudiante(unittest.TestCase):
             self.assistant.messages[1]["content"],
             "Explicación para estudiantes"
         )
+
+
+    def test_academic_management_identity(self):
+        self.assertEqual(
+            self.assistant.config["version"],
+            "0.2.0"
+        )
+
+        self.assertEqual(
+            self.assistant.config["id"],
+            "laia-estudiante"
+        )
+
+        self.assertIn(
+            "Gestión Académica",
+            self.assistant.name
+        )
+
+    def test_rag_configuration(self):
+        knowledge = self.assistant.config["knowledge"]
+
+        self.assertEqual(
+            knowledge["type"],
+            "rag"
+        )
+
+        self.assertEqual(
+            knowledge["status"],
+            "pending_implementation"
+        )
+
+        self.assertTrue(
+            knowledge["require_sources"]
+        )
+
+    def test_document_grounding_instructions(self):
+        prompt = self.assistant.system_prompt
+
+        self.assertIn(
+            "No inventes artículos",
+            prompt
+        )
+
+        self.assertIn(
+            "información institucional verificada",
+            prompt
+        )
+
 
 
 if __name__ == "__main__":
