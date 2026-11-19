@@ -29,14 +29,22 @@ def chunk_document(
 
             chunk_number += 1
 
+           
             chunks.append({
                 "id": f"{document['id']}-C{chunk_number:04d}",
                 "document_id": document["id"],
                 "filename": document["filename"],
                 "page": section["page"],
                 "text": " ".join(selected),
-                "word_count": len(selected)
+                "word_count": len(selected),
+                "extraction_method": section.get(
+                    "extraction_method", "text"
+                ),
+                "requires_review": section.get(
+                    "requires_review", False
+                )
             })
+
 
             if end == len(words):
                 break

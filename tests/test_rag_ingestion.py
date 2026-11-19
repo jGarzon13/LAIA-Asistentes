@@ -8,6 +8,9 @@ from core.rag.document_loader import load_document
 from core.rag.chunker import chunk_document
 from core.rag.knowledge_base import build_index
 
+from unittest.mock import patch
+from pypdf import PdfWriter
+
 
 class TestRAGIngestion(unittest.TestCase):
 
@@ -103,6 +106,59 @@ class TestRAGIngestion(unittest.TestCase):
             len(saved["chunks"]),
             len(index["chunks"])
         )
+
+
+    def test_scanned_pdf_uses_ocr(self):
+        pdf_path = self.documents_dir / "escaneado.pdf"
+
+        writer = PdfWriter()
+        writer.add_blank_page(width=595, height=842)
+
+        with pdf_path.open("wb") as output:
+            writer.write(output)
+
+        with patch(
+            "core.rag.ocr_processor.pytesseract.image_to_string",
+            return_value="Artículo 1. Documento ficticio."
+        ) as mocked_ocr:
+
+            document = load_document(pdf_path)
+
+        self.assertEqual(len(document["sections"]), 1)
+
+        section = document["sections"][0]
+
+        self.assertEqual(section["page"], 1)
+        self.assertEqual(section["extraction_method"], "ocr")
+        self.assertTrue(section["requires_review"])
+        self.assertIn("Artículo 1", section["text"])
+
+        mocked_ocr.assert_called_once()
+
+    def test_ocr_metadata_reaches_chunks(self):
+        document = {
+            "id": "documento-ficticio",
+            "filename": "escaneado.pdf",
+            "sections": [
+                {
+                    "page": 3,
+                    "text": "Contenido académico de prueba.",
+                    "extraction_method": "ocr",
+                    "requires_review": True
+                }
+            ]
+        }
+
+        chunks = chunk_document(document)
+
+        self.assertEqual(len(chunks), 1)
+        self.assertEqual(chunks[0]["page"], 3)
+        self.assertEqual(
+            chunks[0]["extraction_method"], "ocr"
+        )
+        self.assertTrue(chunks[0]["requires_review"])
+
+
 
 
 if __name__ == "__main__":
