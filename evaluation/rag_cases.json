@@ -1,0 +1,27 @@
+
+[
+  {
+    "id": "RAG-001",
+    "question": "¿Qué establece el reglamento sobre las evaluaciones?",
+    "filename": "Reglamento-posgrados-Res-CA-6605.pdf",
+    "relevant_pages": [20]
+  },
+  {
+    "id": "RAG-002",
+    "question": "¿Cuáles son los requisitos para graduarse?",
+    "filename": "Reglamento-posgrados-Res-CA-6605.pdf",
+    "relevant_pages": [25]
+  },
+  {
+    "id": "RAG-003",
+    "question": "¿Qué sucede si un estudiante pierde una asignatura?",
+    "filename": "Reglamento-posgrados-Res-CA-6605.pdf",
+    "relevant_pages": [22]
+  },
+  {
+    "id": "RAG-004",
+    "question": "¿Cuáles son los deberes de los estudiantes de posgrado?",
+    "filename": "Reglamento-posgrados-Res-CA-6605.pdf",
+    "relevant_pages": [5]
+  }
+]
