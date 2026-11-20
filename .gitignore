@@ -10,10 +10,11 @@ htmlcov/
 .env.*
 !.env.example
 
-# Documentos e índices locales
 knowledge/documents/*
 knowledge/index/*
 
-# Permitir conservar las carpetas
+
 !knowledge/documents/.gitkeep
 !knowledge/index/.gitkeep
+
+knowledge/metadata.json

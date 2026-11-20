@@ -3,6 +3,7 @@ import hashlib
 import json
 import os
 import tempfile
+from core.rag.academic_metadata import sync_metadata
 
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -182,8 +183,7 @@ def build_index(
             relative_path
         )
 
-        # Compatibilidad con índices anteriores,
-        # que aún no tenían source_path.
+       
         if old_document is None:
             matches = previous_by_filename.get(
                 path.name, []
@@ -303,9 +303,24 @@ def build_index(
         "stats": stats
     }
 
+    
     save_index_atomic(index, index_file)
 
+    # El catálogo se guarda junto al espacio
+    # documental, fuera de la carpeta index.
+    metadata_file = (
+        index_file.parent.parent / "metadata.json"
+    )
+
+    catalog = sync_metadata(
+        index=index,
+        metadata_file=metadata_file
+    )
+
+    index["metadata_stats"] = catalog["stats"]
+
     return index
+
 
 
 def main():
@@ -326,6 +341,16 @@ def main():
     print(f"Incidencias: {len(index['errors'])}")
 
     print(f"\nÍndice: {INDEX_FILE}")
+
+
+    metadata_stats = index["metadata_stats"]
+
+    print("\nClasificación documental:")
+    print(f"  Nuevos: {metadata_stats['created']}")
+    print(f"  Conservados: {metadata_stats['preserved']}")
+    print(f"  Versiones modificadas: {metadata_stats['changed']}")
+    print(f"  Retirados: {metadata_stats['removed']}")
+
 
 
 if __name__ == "__main__":
