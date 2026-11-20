@@ -104,5 +104,35 @@ class TestDocumentRetriever(unittest.TestCase):
             self.retriever.search("evaluaciones", top_k=0)
 
 
+    def test_accepts_filtered_chunks(self):
+        filtered_chunks = [
+            chunk for chunk in self.retriever.chunks
+            if chunk["filename"] == "reglamento.pdf"
+        ]
+
+        filtered_retriever = DocumentRetriever(
+            chunks=filtered_chunks
+        )
+
+        self.assertEqual(
+            len(filtered_retriever.chunks),
+            2
+        )
+
+        results = filtered_retriever.search(
+            "evaluaciones académicas"
+        )
+
+        self.assertTrue(results)
+
+        self.assertTrue(
+            all(
+                result["filename"] == "reglamento.pdf"
+                for result in results
+            )
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()

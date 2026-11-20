@@ -36,9 +36,22 @@ def tokenize(text: str) -> list[str]:
 
 
 class DocumentRetriever:
-    def __init__(self, index_file: str | Path = INDEX_FILE):
+    
+    def __init__(
+        self,
+        index_file: str | Path = INDEX_FILE,
+        chunks: list[dict] | None = None
+    ):
         self.index_file = Path(index_file)
 
+        # Si recibimos fragmentos filtrados por ámbito,
+        # trabajamos directamente con ellos.
+        if chunks is not None:
+            self.chunks = list(chunks)
+            return
+
+        # Si no recibimos fragmentos, usamos el índice
+        # documental completo, como antes.
         if not self.index_file.is_file():
             raise FileNotFoundError(
                 f"No se encontró el índice: {self.index_file}"
@@ -49,6 +62,7 @@ class DocumentRetriever:
         )
 
         self.chunks = data.get("chunks", [])
+
 
     def search(
         self,
