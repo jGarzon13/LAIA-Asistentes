@@ -130,5 +130,53 @@ class TestRAGService(unittest.TestCase):
         )
 
 
+    def test_student_rag_role(self):
+        result = self.rag.ask(
+            "evaluaciones académicas",
+            "posgrado",
+            assistant_type="estudiante"
+        )
+
+        self.assertEqual(len(self.provider.calls), 1)
+        self.assertTrue(result["sources"])
+
+        messages = self.provider.calls[0]
+
+        self.assertIn(
+            "Asistente Estudiante",
+            messages[0]["content"]
+        )
+
+    def test_teacher_rag_role(self):
+        result = self.rag.ask(
+            "evaluaciones académicas",
+            "posgrado",
+            assistant_type="docente"
+        )
+
+        self.assertEqual(len(self.provider.calls), 1)
+        self.assertTrue(result["sources"])
+
+        messages = self.provider.calls[0]
+
+        self.assertIn(
+            "Asistente Docente",
+            messages[0]["content"]
+        )
+
+    def test_invalid_rag_role(self):
+        with self.assertRaises(ValueError):
+            self.rag.ask(
+                "evaluaciones académicas",
+                "posgrado",
+                assistant_type="administrador"
+            )
+
+        self.assertEqual(
+            self.provider.calls, []
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -4,6 +4,8 @@ from pathlib import Path
 from core.assistant import Assistant
 from core.models.ollama_provider import OllamaProvider
 from core.models.groq_provider import GroqProvider
+from core.rag.console import run_rag_console
+
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -39,7 +41,9 @@ def run_chat(assistant: Assistant):
     while True:
         message = input("Tú: ").strip()
 
-        if message.lower() in( "/salir", "/exit", "break"):
+        if message.lower() in (
+            "/salir", "/exit", "/back"
+        ):
             break
 
         if message.lower() == "/reiniciar":
@@ -52,16 +56,49 @@ def run_chat(assistant: Assistant):
 
         try:
             print("\nGenerando respuesta...\n")
+
             response = assistant.chat(message)
-            print(f"{assistant.name}:\n{response}\n")
+
+            print(
+                f"{assistant.name}:\n"
+                f"{response}\n"
+            )
 
         except (RuntimeError, ValueError) as exc:
             print(f"Error: {exc}\n")
 
 
+def run_teacher_menu(assistant, provider):
+    while True:
+        print("\n" + "=" * 50)
+        print("LAIA - Asistente Docente")
+        print("=" * 50)
+        print("1. Asistencia pedagógica")
+        print("2. Consulta documental con RAG")
+        print("0. Volver al menú principal")
+
+        option = input("\nSelecciona una opción: ").strip()
+
+        if option == "0":
+            return
+
+        if option == "1":
+            # Mantiene el funcionamiento original.
+            run_chat(assistant)
+
+        elif option == "2":
+            # Nuevo modo documental para docentes.
+            run_rag_console(
+                provider=provider,
+                assistant_type="docente"
+            )
+
+        else:
+            print("Opción no válida.")
+
+
 def main():
     provider = select_provider()
-    
 
     assistants = {
         "1": Assistant(
@@ -83,14 +120,27 @@ def main():
         print("2. Asistente Estudiante")
         print("0. Salir")
 
-        option = input("\nSelecciona una opción: ").strip()
+        option = input(
+            "\nSelecciona una opción: "
+        ).strip()
 
         if option == "0":
             print("Finalizando LAIA...")
             break
 
-        if option in assistants:
-            run_chat(assistants[option])
+        elif option == "1":
+            run_teacher_menu(
+                assistant=assistants["1"],
+                provider=provider
+            )
+
+        elif option == "2":
+            # El estudiante consulta la base documental.
+            run_rag_console(
+                provider=provider,
+                assistant_type="estudiante"
+            )
+
         else:
             print("Opción no válida.")
 
