@@ -10,13 +10,11 @@ htmlcov/
 .env.*
 !.env.example
 
-knowledge/documents/*
+
 knowledge/index/*
-
-
-!knowledge/documents/.gitkeep
 !knowledge/index/.gitkeep
 
+# Metadatos locales generados
 knowledge/metadata.json
 
 evaluation/results/
