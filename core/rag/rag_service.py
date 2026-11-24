@@ -275,9 +275,13 @@ class RAGService:
         return {
             "answer": answer,
             "sources": sources,
+             "retrieved_contexts": [
+                item["text"] for item in results
+            ],
             "warning": (
                 "Prototipo: la vigencia normativa y la "
                 "fidelidad del OCR no están verificadas "
                 "automáticamente."
             )
+            
         }

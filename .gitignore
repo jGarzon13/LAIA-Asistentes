@@ -18,3 +18,5 @@ knowledge/index/*
 !knowledge/index/.gitkeep
 
 knowledge/metadata.json
+
+evaluation/results/
