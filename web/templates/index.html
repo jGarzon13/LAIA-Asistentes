@@ -1,32 +1,146 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LAIA · Asistentes académicos</title>
-<style>
-:root {color-scheme:light;--ink:#183047;--muted:#718195;--navy:#10283f;--light:#f4f7fb;--edge:#dce5ef;--accent:#1869e8}
-*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--light)}
-.page{max-width:1200px;margin:28px auto;padding:0 16px;display:grid;grid-template-columns:255px 1fr;gap:18px}.sidebar,.main{border:1px solid var(--edge);background:white;border-radius:18px;overflow:hidden}.sidebar{padding:24px}.logo{font-size:25px;letter-spacing:-1px;font-weight:850;color:var(--navy)}.kicker{font-size:11px;letter-spacing:1.4px;color:var(--accent);text-transform:uppercase;font-weight:750}.sub{font-size:13px;color:var(--muted);margin-bottom:26px}label{display:block;font-size:12px;font-weight:800;margin:17px 0 6px}select,button,textarea{font:inherit}select{width:100%;border:1px solid var(--edge);border-radius:9px;padding:10px;background:#fff;color:var(--ink)}.reset{margin-top:22px;width:100%;padding:10px;border-radius:10px;border:1px solid var(--edge);background:white;cursor:pointer}.main{min-height:75vh;display:flex;flex-direction:column}.header{padding:20px 26px;border-bottom:1px solid var(--edge);display:flex;justify-content:space-between;align-items:center}.header strong{font-size:18px}.pill{background:#eaf4ef;color:#227c52;border-radius:50px;padding:5px 10px;font-size:11px;font-weight:750}.chat{flex:1;overflow:auto;padding:28px;display:flex;flex-direction:column;gap:16px;min-height:420px}.bubble{border-radius:13px;padding:14px 17px;max-width:87%;white-space:pre-wrap;overflow-wrap:anywhere}.user{align-self:flex-end;background:#e8f0ff}.bot{align-self:flex-start;background:#f3f6f9}.who{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:6px}.sources{margin-top:12px;padding-top:10px;border-top:1px solid var(--edge);font-size:12px;color:#45617e}.sources>div{margin:5px 0}.warning{font-size:11px;color:#8b6b35;margin-top:10px}.compose{border-top:1px solid var(--edge);padding:18px 22px;display:flex;gap:11px;align-items:flex-end}textarea{width:100%;min-height:48px;max-height:150px;resize:vertical;border:1px solid var(--edge);border-radius:11px;padding:12px;color:var(--ink)}.send{background:var(--accent);color:white;border:0;border-radius:11px;padding:13px 21px;cursor:pointer;font-weight:750}.send:disabled{opacity:.5;cursor:wait}.hint{font-size:11px;color:var(--muted);padding:0 22px 16px} @media(max-width:740px){.page{grid-template-columns:1fr;margin:10px auto}.sidebar{padding:16px}.main{min-height:68vh}.chat{padding:14px}.bubble{max-width:97%}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#FBF5EC">
+  <title>LAIA · Asistentes académicos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:light;--cream:#FBF5EC;--red:#FF051E;--wine:#8A1428;--berry:#AC0B32;--ink:#2F2424;--quiet:#706262;--line:#E8DBD2;--white:#FFFFFF;--soft:#F5EBE3}
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.55 'DM Sans',Arial,sans-serif}
+    button,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #AC0B32;outline-offset:3px}
+    .shell{width:min(100%,1120px);height:min(94vh,880px);min-height:620px;margin:3vh auto;display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 32px rgba(64,31,31,.06)}
+    .top{display:flex;align-items:center;gap:18px;padding:18px 28px;background:var(--cream);border-bottom:1px solid var(--line)}
+    .identity{display:flex;align-items:center;gap:12px;min-width:220px}.mark{font-weight:800;font-size:29px;letter-spacing:-1.2px;color:var(--wine)}.mark::after{content:'';display:inline-block;width:8px;height:8px;background:var(--red);border-radius:50%;margin-left:5px}.brandline{font-size:11px;color:var(--quiet);line-height:1.3}.right{margin-left:auto;display:flex;align-items:center;gap:12px}
+    .provider{border:1px solid var(--line);background:var(--white);color:var(--wine);font-size:12px;padding:8px 10px;border-radius:9px;max-width:180px}
+    .reset{border:1px solid var(--line);background:transparent;padding:8px 11px;border-radius:9px;color:var(--wine);font-size:12px;font-weight:700}
+    .role-tabs{display:flex;gap:4px;background:#F1E5DD;padding:4px;border-radius:12px;align-self:center}.role-tabs button{border:0;background:transparent;color:var(--quiet);padding:9px 18px;border-radius:9px;font-size:13px;font-weight:700}.role-tabs button[aria-selected=true]{background:white;color:var(--wine);box-shadow:0 1px 4px #00000010}
+    .main{display:flex;flex-direction:column;min-height:0;flex:1}
+    .chat{flex:1;overflow-y:auto;padding:30px max(25px,calc((100% - 750px)/2));display:flex;flex-direction:column;gap:22px;scroll-behavior:smooth}
+    .welcome{padding:52px 10px;text-align:center;margin:auto 0}.welcome .emblem{margin:auto auto 17px;border-radius:23px;width:65px;height:65px;display:grid;place-items:center;background:var(--cream);color:var(--red);font-size:27px;font-weight:800}.welcome h1{font-size:28px;line-height:1.2;margin:0 0 9px;color:var(--wine)}.welcome p{max-width:490px;margin:0 auto;color:var(--quiet)}.prompts{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:25px}.prompt{border:1px solid var(--line);background:var(--cream);border-radius:24px;padding:9px 13px;color:var(--wine);font-size:12px}
+    .message{width:100%;max-width:720px}.message.user{align-self:flex-end;width:auto;max-width:83%}.message .caption{font-size:11px;text-transform:uppercase;letter-spacing:.7px;font-weight:800;color:var(--wine);margin-bottom:6px}.message .content{padding:15px 18px;border-radius:16px;background:#F8F3EF;overflow-wrap:anywhere}.message.user .content{background:#FCE8E7;border-bottom-right-radius:5px}.message.bot .content{border-top-left-radius:5px}.source-list{border-top:1px solid var(--line);margin-top:13px;padding-top:11px}.source-item{font-size:12px;color:#594C4C;margin-top:5px;overflow-wrap:anywhere}.warning{font-size:11px;margin-top:12px;color:#775D4F}.response-type{color:var(--quiet);font-size:11px;margin-top:8px}
+    .content p{margin:0 0 10px}.content p:last-child{margin-bottom:0}.content h2,.content h3,.content h4{color:var(--wine);line-height:1.3;margin:14px 0 7px}.content h2{font-size:18px}.content h3{font-size:16px}.content h4{font-size:14px}
+    .content ul,.content ol{margin:7px 0 12px;padding-left:24px}.content li{margin:5px 0}.content li p{margin:0}.content strong{font-weight:800}.content code{background:#F0E5DD;border-radius:4px;padding:2px 5px;font:12px/1.5 Consolas,monospace}.content pre{background:#2F2424;color:#FFF7F0;padding:13px;border-radius:9px;white-space:pre;overflow-x:auto;margin:9px 0}.content pre code{background:transparent;color:inherit;padding:0}.content blockquote{margin:10px 0;padding:8px 12px;border-left:3px solid var(--berry);background:#FFF7F2}.message.user .content{white-space:pre-wrap}.content .source-list{font-size:12px}
+    .bottom{padding:14px max(25px,calc((100% - 750px)/2)) 18px;background:white;border-top:1px solid var(--line)}.composer{border:1px solid #DCCBC2;border-radius:15px;display:flex;align-items:flex-end;padding:8px;gap:8px;box-shadow:0 2px 8px #1c0d0710}textarea{padding:10px;border:0;resize:none;flex:1;min-width:0;max-height:180px;min-height:48px;background:transparent;color:var(--ink);outline:none}textarea:focus-visible{outline:none}.send{border:0;border-radius:10px;background:var(--wine);color:white;font-weight:800;padding:11px 19px}.send:disabled{opacity:.5;cursor:wait}.footnote{font-size:11px;color:var(--quiet);margin-top:9px;text-align:center}
+    @media(max-width:780px){.shell{height:100dvh;min-height:0;margin:0;border:0;border-radius:0}.top{padding:12px;flex-wrap:wrap;gap:10px}.identity{min-width:0}.brandline{display:none}.mark{font-size:24px}.role-tabs{order:3;width:100%;justify-content:center}.role-tabs button{flex:1}.right{gap:6px}.provider{max-width:135px}.chat{padding:20px 15px}.bottom{padding:12px 14px}.welcome{padding:20px 0}.welcome h1{font-size:24px}}
+  </style>
 </head>
 <body>
-<div class="page">
-<aside class="sidebar"><div class="kicker">Universidad Autónoma de Occidente</div><div class="logo">LAIA <span style="color:#4c94f0">✦</span></div><div class="sub">Prototipo de asistentes académicos</div>
-<label for="provider">Proveedor de IA</label><select id="provider"><option value="groq">Groq · Qwen</option><option value="ollama">Ollama · Gemma local</option></select>
-<label for="role">Asistente</label><select id="role"><option value="estudiante">Estudiante</option><option value="docente">Docente</option></select>
-<label for="mode">Modo</label><select id="mode"><option value="documental">Consulta documental · RAG</option></select>
-<label for="scope">Ámbito documental</label><select id="scope"><option value="pregrado">Pregrado</option><option value="posgrado">Posgrado</option><option value="general">General</option></select>
-<button class="reset" id="reset">↻ Reiniciar conversación</button>
-<p class="sub" style="margin:22px 0 0">Las citas se basan en fragmentos recuperados. Verifica siempre la vigencia de la normativa.</p></aside>
-<section class="main"><header class="header"><strong id="heading">Asistente Estudiante</strong><span class="pill">Prototipo local</span></header><main class="chat" id="chat" aria-live="polite"></main><form class="compose" id="form"><textarea id="question" placeholder="Escribe tu consulta académica…" maxlength="3000" required></textarea><button class="send" id="send">Enviar</button></form><div class="hint">Enter para enviar · Shift+Enter para salto de línea. El modo RAG recupera fuentes de nuevo en cada consulta.</div></section>
+<div class="shell">
+  <header class="top">
+    <div class="identity"><span class="mark" aria-label="LAIA">LAIA</span><span class="brandline">Asistentes académicos<br>Universidad Autónoma de Occidente</span></div>
+    <nav class="role-tabs" aria-label="Seleccionar asistente">
+      <button type="button" id="studentTab" aria-selected="true">Estudiante</button>
+      <button type="button" id="teacherTab" aria-selected="false">Docente</button>
+    </nav>
+    <div class="right">
+      <label for="provider" class="brandline">Modelo</label>
+      <select class="provider" id="provider" aria-label="Proveedor de IA"><option value="groq">Groq · Qwen</option><option value="ollama">Ollama · Gemma</option></select>
+      <button type="button" id="reset" class="reset" title="Limpiar conversación">Reiniciar</button>
+    </div>
+  </header>
+  <section class="main">
+    <main class="chat" id="chat" aria-live="polite">
+      <div class="welcome" id="welcome"><div class="emblem">L</div><h1 id="welcomeTitle">¿En qué puedo ayudarte?</h1><p id="welcomeDescription">Consulta requisitos, trámites y documentos académicos de la universidad con lenguaje natural.</p><div class="prompts" id="prompts"></div></div>
+    </main>
+    <footer class="bottom"><form class="composer" id="form"><textarea id="question" placeholder="Escribe tu pregunta..." rows="2" maxlength="3000" required aria-label="Mensaje para LAIA"></textarea><button class="send" id="send" type="submit">Enviar</button></form></footer>
+  </section>
 </div>
 <script>
-const el=id=>document.getElementById(id), chat=el('chat');
-function bubble(who,text,extra){const box=document.createElement('article');box.className='bubble '+(who==='Tú'?'user':'bot');const title=document.createElement('div');title.className='who';title.textContent=who;box.append(title);const body=document.createElement('div');body.textContent=text;box.append(body);if(extra?.sources?.length){const src=document.createElement('div');src.className='sources';src.textContent='Fuentes recuperadas:';for(const s of extra.sources){const row=document.createElement('div');row.textContent=`[${s.reference}] ${s.filename}, pág. ${s.page ?? 'N/D'} · score ${Number(s.score).toFixed(3)}`;src.append(row)}box.append(src)}if(extra?.warning){const w=document.createElement('div');w.className='warning';w.textContent=extra.warning;box.append(w)}chat.append(box);chat.scrollTop=chat.scrollHeight}
-function sync(){const teacher=el('role').value==='docente',mode=el('mode');mode.replaceChildren();for(const [value,label] of teacher?[['pedagogico','Asistencia pedagógica'],['documental','Consulta documental · RAG']]:[['documental','Consulta documental · RAG']]){const o=document.createElement('option');o.value=value;o.textContent=label;mode.add(o)}el('heading').textContent=teacher?'Asistente Docente':'Asistente Estudiante';el('scope').disabled=teacher&&mode.value==='pedagogico';chat.replaceChildren();bubble('LAIA','Hola. Selecciona el ámbito y escribe tu pregunta. Para normas y trámites, consulta siempre la fuente original.')}
-el('role').addEventListener('change',sync);el('mode').addEventListener('change',()=>{el('scope').disabled=el('mode').value==='pedagogico';chat.replaceChildren()});el('provider').addEventListener('change',()=>chat.replaceChildren());el('scope').addEventListener('change',()=>chat.replaceChildren());
-el('form').addEventListener('submit',async e=>{e.preventDefault();const question=el('question'),message=question.value.trim();if(!message)return;bubble('Tú',message);question.value='';const btn=el('send');btn.disabled=true;btn.textContent='Consultando…';try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,provider:el('provider').value,role:el('role').value,scope:el('scope').value,mode:el('mode').value})});const d=await r.json();bubble('LAIA',d.error||d.answer||'Sin respuesta',d)}catch(err){bubble('LAIA','No se pudo conectar con el servidor local.')}finally{btn.disabled=false;btn.textContent='Enviar';question.focus()}});
-el('question').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();el('form').requestSubmit()}});
-el('reset').addEventListener('click',async()=>{await fetch('/api/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({provider:el('provider').value})});chat.replaceChildren();bubble('LAIA','Conversación reiniciada.')});sync();
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const chat = $('chat');
+  let role = 'estudiante';
+  let busy = false;
+  let epoch = 0;
+  const suggestions = {
+    estudiante: ['¿Qué debo hacer para graduarme?', '¿Cuáles son mis deberes como estudiante de posgrado?', '¿Qué dice la política de datos personales?'],
+    docente: ['Diseña una actividad de 15 minutos para enseñar Python', '¿Qué dice el reglamento de posgrado sobre evaluaciones?', 'Ayúdame a construir una rúbrica de evaluación']
+  };
+  function welcome(){
+    chat.replaceChildren();
+    const block = document.createElement('div'); block.className='welcome'; block.id='welcome';
+    const icon = document.createElement('div'); icon.className='emblem'; icon.textContent='L';block.append(icon);
+    const title = document.createElement('h1');title.textContent=role==='docente'?'Tu apoyo para enseñar y consultar':'¿En qué puedo ayudarte?';block.append(title);
+    const text = document.createElement('p');text.textContent=role==='docente'?'Prepara actividades o consulta lineamientos institucionales en una sola conversación.':'Consulta trámites, requisitos y documentos académicos con tus propias palabras.';block.append(text);
+    const prompts = document.createElement('div');prompts.className='prompts';
+    for(const label of suggestions[role]) {const button=document.createElement('button');button.type='button';button.className='prompt';button.textContent=label;button.addEventListener('click',()=>{$('question').value=label;$('question').focus()});prompts.append(button)}
+    block.append(prompts);chat.append(block);
+  }
+  // Markdown seguro, sin librerías externas ni insertar HTML sin sanitizar.
+  // Soporta títulos, párrafos, listas, negritas, cursivas y código.
+  function inlineMarkdown(text, target){
+    const token=/(\*\*([^*\n]+)\*\*|__([^_\n]+)__|`([^`\n]+)`|\*([^*\n]+)\*|_([^_\n]+)_)/g;
+    let last=0,match;
+    while((match=token.exec(text))!==null){
+      if(match.index>last)target.append(document.createTextNode(text.slice(last,match.index)));
+      const element=document.createElement(match[2]||match[3]?'strong':match[4]?'code':'em');
+      element.textContent=match[2]||match[3]||match[4]||match[5]||match[6];
+      target.append(element);last=token.lastIndex;
+    }
+    if(last<text.length)target.append(document.createTextNode(text.slice(last)));
+  }
+  function renderMarkdown(message, container){
+    const lines=String(message||'').replace(/\r\n?/g,'\n').split('\n');
+    let list=null, listType=null, paragraph=null, code=null;
+    const closeList=()=>{list=null;listType=null};
+    const closeParagraph=()=>{paragraph=null};
+    for(const raw of lines){
+      const line=raw.trim();
+      if(/^```/.test(line)){
+        closeList();closeParagraph();
+        if(code){code=null}else{const pre=document.createElement('pre');code=document.createElement('code');pre.append(code);container.append(pre)}
+        continue;
+      }
+      if(code){code.textContent+=raw+'\n';continue}
+      if(!line){closeList();closeParagraph();continue}
+      const heading=/^(#{1,3})\s+(.+)$/.exec(line);
+      if(heading){closeList();closeParagraph();const h=document.createElement('h'+Math.min(heading[1].length+1,4));inlineMarkdown(heading[2],h);container.append(h);continue}
+      const bullet=/^[-*+]\s+(.+)$/.exec(line);
+      const numbered=/^\d+[.)]\s+(.+)$/.exec(line);
+      if(bullet||numbered){closeParagraph();const type=bullet?'ul':'ol';if(!list||listType!==type){list=document.createElement(type);container.append(list);listType=type};const li=document.createElement('li');inlineMarkdown((bullet||numbered)[1],li);list.append(li);continue}
+      closeList();
+      if(/^>\s?/.test(line)){closeParagraph();const b=document.createElement('blockquote');inlineMarkdown(line.replace(/^>\s?/,''),b);container.append(b);continue}
+      if(!paragraph){paragraph=document.createElement('p');container.append(paragraph)}else{paragraph.append(document.createTextNode(' '))}
+      inlineMarkdown(line,paragraph);
+    }
+  }
+  function bubble(kind, message, data={}) {
+    const empty=$('welcome');if(empty)empty.remove();
+    const item=document.createElement('article');item.className='message '+kind;
+    const caption=document.createElement('div');caption.className='caption';caption.textContent=kind==='user'?'Tú':role==='docente'?'LAIA · Docente':'LAIA · Estudiante';item.append(caption);
+    const content=document.createElement('div');content.className='content';
+    if(kind==='bot')renderMarkdown(message,content);else content.textContent=message;
+    item.append(content);
+    if(data.sources?.length){const list=document.createElement('div');list.className='source-list';const name=document.createElement('strong');name.textContent='Documentos recuperados';list.append(name);for(const source of data.sources){const line=document.createElement('div');line.className='source-item';line.textContent=`[${source.reference}] ${source.filename} · pág. ${source.page??'s/d'}`;list.append(line)}content.append(list)}
+    chat.append(item);chat.scrollTop=chat.scrollHeight;
+  }
+  function selectedRole(next){if(busy)return;role=next;epoch++;$('studentTab').setAttribute('aria-selected',role==='estudiante');$('teacherTab').setAttribute('aria-selected',role==='docente');welcome()}
+  $('studentTab').addEventListener('click',()=>selectedRole('estudiante'));
+  $('teacherTab').addEventListener('click',()=>selectedRole('docente'));
+  $('form').addEventListener('submit', async event=>{
+    event.preventDefault();if(busy)return;
+    const input=$('question');const message=input.value.trim();if(!message)return;
+    const currentEpoch=epoch;const currentRole=role;const currentProvider=$('provider').value;
+    bubble('user',message);input.value='';busy=true;$('send').disabled=true;$('send').textContent='...';
+    try{
+      const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,role:currentRole,provider:currentProvider})});
+      const result=await response.json();if(epoch===currentEpoch)bubble('bot',result.error||result.answer||'No hubo respuesta',result);
+    }catch(error){if(epoch===currentEpoch)bubble('bot','No se pudo conectar con el servidor local.');}
+    finally{busy=false;$('send').disabled=false;$('send').textContent='Enviar';input.focus()}
+  });
+  $('question').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();$('form').requestSubmit()}});
+  $('reset').addEventListener('click',async()=>{
+    if(busy)return;epoch++;
+    try{await fetch('/api/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({provider:$('provider').value,role})})}catch(error){}welcome();
+  });
+  $('provider').addEventListener('change',()=>{if(!busy){epoch++;welcome()}});
+  welcome();
+})();
 </script>
-</body></html>
+</body>
+</html>
