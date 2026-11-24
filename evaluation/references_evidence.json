@@ -1,0 +1,48 @@
+{
+  "protocol": "Referencias redactadas a partir de documentos originales, no de respuestas del modelo. Requieren aprobación humana antes de considerarse ground truth validado. Fecha de corte 2026-11-24.",
+  "cases": {
+    "PRE-01": {
+      "question": "¿Qué debo hacer para graduarme?",
+      "scope": "pregrado",
+      "review_status": "pending_human_approval",
+      "source": "Resolución Consejo Académico 6865 de 2026",
+      "pages": [
+        1
+      ],
+      "articles": [
+        "1",
+        "2",
+        "3"
+      ],
+      "observations": [
+        "La Resolución 6865 se aplica desde el primer periodo académico de 2027; evitar presentarla como norma ya aplicable en noviembre de 2026.",
+        "El fragmento RAG recuperado estaba truncado en la página 1 y omitía percentil 40, alternativa institucional y fecha de aplicación.",
+        "La pregunta es amplia y necesita fecha/modalidad/programa para orientación actual definitiva."
+      ]
+    },
+    "POS-01": {
+      "question": "¿Qué establece el reglamento sobre evaluaciones?",
+      "scope": "posgrado",
+      "review_status": "pending_human_approval",
+      "source": "Resolución Consejo Académico 6605 de 2017",
+      "pages": [
+        20,
+        21
+      ],
+      "articles": [
+        "54",
+        "55",
+        "56",
+        "57",
+        "58",
+        "59",
+        "60"
+      ],
+      "observations": [
+        "La regla de evaluador adicional para pruebas superiores al 15 % se restringe a pruebas orales de preguntas formuladas por el profesor.",
+        "La regla general de 35 % tiene excepciones explícitas para trabajo de grado, pasantías, prácticas obligatorias y asignaturas de doctorado (artículo 60, parágrafo 3).",
+        "No se ha verificado vigencia frente a modificaciones posteriores."
+      ]
+    }
+  }
+}
