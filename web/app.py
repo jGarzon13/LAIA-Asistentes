@@ -23,6 +23,7 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024
 _lock = Lock()
 _teacher_sessions = {}  # solo servidor local monousuario
+_chat_sessions = {}  # conversaciones breves de chat, sólo memoria RAM
 _pending = {}  # (role, provider) -> {'message', 'reason'}
 _last_scope = {}  # (role, provider) -> último ámbito explícito durante la sesión
 
@@ -47,11 +48,42 @@ def _decode_clarification(reply, original, reason):
             return original + ' (' + scope + ')', scope, None
         return None
     if reason in ('intencion_ambigua', 'intencion_no_clara'):
-        if answer in ('pedagogica', 'pedagogico', 'actividad', 'docencia', 'pedagogia'):
+        if answer in ('pedagogica', 'pedagogico', 'actividad', 'docencia',
+                      'pedagogia', 'actividad docente', 'actividad pedagogica'):
             return original, None, 'pedagogical'
-        if answer in ('documental', 'documentos', 'institucional', 'reglamento', 'rag'):
+        if answer in ('documental', 'documentos', 'institucional', 'reglamento',
+                      'rag', 'consultar informacion institucional',
+                      'informacion institucional'):
             return original, None, 'rag'
+        if answer in ('chat', 'conversar', 'charlar'):
+            return original, None, 'chat'
     return None
+
+
+CHAT_SYSTEM = (
+    'Eres LAIA, asistente académico de prueba de la Universidad Autónoma de Occidente. '
+    'Puedes conversar sobre temas generales, explicar conceptos y ayudar con estudio '
+    'y escritura. Responde de forma clara, cálida y breve (normalmente 2 a 5 frases). '
+    'No inventes reglamentos, fechas, requisitos o políticas de la UAO. '
+    'Si preguntan por normativa institucional, indica que debe usarse la consulta documental. '
+    'No afirmes que representas oficialmente a la universidad.'
+)
+
+
+def _short_chat(question, provider, key):
+    """Chat sin consulta RAG. Conserva máximo dos intercambios anteriores."""
+    history = _chat_sessions.get(key, [])[-4:]
+    messages = [{'role': 'system', 'content': CHAT_SYSTEM}]
+    messages.extend(history)
+    messages.append({'role': 'user', 'content': question})
+    if isinstance(provider, GroqProvider):
+        provider.max_completion_tokens = 400
+    answer = provider.generate(messages)
+    _chat_sessions[key] = (history + [
+        {'role': 'user', 'content': question},
+        {'role': 'assistant', 'content': answer},
+    ])[-4:]
+    return answer
 
 
 @app.get('/')
@@ -92,6 +124,10 @@ def chat():
                 return jsonify(answer=route.message, sources=[], routing='clarification', warning='')
 
             provider = make_provider(provider_name)
+            if route.kind == 'chat':
+                answer = _short_chat(question, provider, key)
+                return jsonify(answer=answer, sources=[], routing='chat', warning='')
+
             if route.kind == 'pedagogical':
                 if key not in _teacher_sessions:
                     _teacher_sessions[key] = Assistant(ROOT / 'assistants' / 'docente', provider)
@@ -129,6 +165,7 @@ def reset():
             assistant.reset()
         _pending.pop(key, None)
         _last_scope.pop(key, None)
+        _chat_sessions.pop(key, None)
     return jsonify(ok=True)
 
 

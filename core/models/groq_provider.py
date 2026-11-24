@@ -35,7 +35,7 @@ class GroqProvider(ModelProvider):
             "model": self.model,
             "messages": messages,
             "temperature": 0.2,
-            "max_completion_tokens": 1200,
+            "max_completion_tokens": getattr(self, "max_completion_tokens", 1200),
             "stream": False
         }
 
