@@ -18,3 +18,13 @@ knowledge/index/*
 knowledge/metadata.json
 
 evaluation/results/
+
+# Grafo documental generado
+knowledge/graph/*.json
+
+# Índices de GraphRAG generados localmente
+knowledge/graph/*.json
+knowledge/graph/*.csv
+
+# Reportes temporales
+article_audit.txt
