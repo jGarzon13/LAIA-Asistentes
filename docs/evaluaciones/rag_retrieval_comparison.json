@@ -1,0 +1,197 @@
+{
+  "created_at": "2026-11-20T14:47:43.865394+00:00",
+  "top_k": 3,
+  "total_cases": 4,
+  "results": {
+    "TF-IDF": {
+      "algorithm": "TF-IDF",
+      "hit_at_k": 1.0,
+      "mrr_at_k": 0.7083333333333333,
+      "cases": [
+        {
+          "id": "RAG-001",
+          "question": "¿Qué establece el reglamento sobre las evaluaciones?",
+          "retrieved_pages": [
+            4,
+            1,
+            20
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0018",
+            "7c82fdec2acb5aa6-C0002",
+            "7c82fdec2acb5aa6-C0105"
+          ],
+          "scores": [
+            0.1685,
+            0.1658,
+            0.1426
+          ],
+          "hit": 1,
+          "reciprocal_rank": 0.3333333333333333,
+          "first_relevant_rank": 3
+        },
+        {
+          "id": "RAG-002",
+          "question": "¿Cuáles son los requisitos para graduarse?",
+          "retrieved_pages": [
+            25,
+            6,
+            25
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0130",
+            "7c82fdec2acb5aa6-C0026",
+            "7c82fdec2acb5aa6-C0132"
+          ],
+          "scores": [
+            0.149,
+            0.0834,
+            0.0809
+          ],
+          "hit": 1,
+          "reciprocal_rank": 1.0,
+          "first_relevant_rank": 1
+        },
+        {
+          "id": "RAG-003",
+          "question": "¿Qué sucede si un estudiante pierde una asignatura?",
+          "retrieved_pages": [
+            4,
+            22,
+            18
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0016",
+            "7c82fdec2acb5aa6-C0112",
+            "7c82fdec2acb5aa6-C0093"
+          ],
+          "scores": [
+            0.1537,
+            0.1154,
+            0.0999
+          ],
+          "hit": 1,
+          "reciprocal_rank": 0.5,
+          "first_relevant_rank": 2
+        },
+        {
+          "id": "RAG-004",
+          "question": "¿Cuáles son los deberes de los estudiantes de posgrado?",
+          "retrieved_pages": [
+            5,
+            3,
+            1
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0023",
+            "7c82fdec2acb5aa6-C0013",
+            "7c82fdec2acb5aa6-C0002"
+          ],
+          "scores": [
+            0.1897,
+            0.0956,
+            0.0936
+          ],
+          "hit": 1,
+          "reciprocal_rank": 1.0,
+          "first_relevant_rank": 1
+        }
+      ]
+    },
+    "BM25": {
+      "algorithm": "BM25",
+      "hit_at_k": 0.75,
+      "mrr_at_k": 0.625,
+      "cases": [
+        {
+          "id": "RAG-001",
+          "question": "¿Qué establece el reglamento sobre las evaluaciones?",
+          "retrieved_pages": [
+            4,
+            21,
+            1
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0018",
+            "7c82fdec2acb5aa6-C0109",
+            "7c82fdec2acb5aa6-C0003"
+          ],
+          "scores": [
+            6.5191,
+            6.4764,
+            5.7967
+          ],
+          "hit": 0,
+          "reciprocal_rank": 0.0,
+          "first_relevant_rank": null
+        },
+        {
+          "id": "RAG-002",
+          "question": "¿Cuáles son los requisitos para graduarse?",
+          "retrieved_pages": [
+            25,
+            27,
+            6
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0130",
+            "7c82fdec2acb5aa6-C0140",
+            "7c82fdec2acb5aa6-C0026"
+          ],
+          "scores": [
+            3.97,
+            3.2297,
+            3.1992
+          ],
+          "hit": 1,
+          "reciprocal_rank": 1.0,
+          "first_relevant_rank": 1
+        },
+        {
+          "id": "RAG-003",
+          "question": "¿Qué sucede si un estudiante pierde una asignatura?",
+          "retrieved_pages": [
+            4,
+            22,
+            24
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0016",
+            "7c82fdec2acb5aa6-C0112",
+            "7c82fdec2acb5aa6-C0127"
+          ],
+          "scores": [
+            6.0167,
+            5.7918,
+            5.4883
+          ],
+          "hit": 1,
+          "reciprocal_rank": 0.5,
+          "first_relevant_rank": 2
+        },
+        {
+          "id": "RAG-004",
+          "question": "¿Cuáles son los deberes de los estudiantes de posgrado?",
+          "retrieved_pages": [
+            5,
+            3,
+            1
+          ],
+          "retrieved_ids": [
+            "7c82fdec2acb5aa6-C0023",
+            "7c82fdec2acb5aa6-C0013",
+            "7c82fdec2acb5aa6-C0002"
+          ],
+          "scores": [
+            9.0922,
+            5.3591,
+            4.8924
+          ],
+          "hit": 1,
+          "reciprocal_rank": 1.0,
+          "first_relevant_rank": 1
+        }
+      ]
+    }
+  }
+}
