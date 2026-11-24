@@ -14,6 +14,7 @@ from core.assistant import Assistant
 from core.models.groq_provider import GroqProvider
 from core.models.ollama_provider import OllamaProvider
 from core.rag.rag_service import RAGService
+from core.rag.graph.multidocument_service import MultiDocumentGraphRAGService
 from web.router import route_query, normalize
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,12 +65,13 @@ def chat():
     question = str(payload.get('message', '')).strip()
     role = payload.get('role')
     provider_name = payload.get('provider')
+    rag_engine = payload.get('rag_engine', 'naive')
     if not question or len(question) > 3000:
         return jsonify(error='Escribe una pregunta de 1 a 3000 caracteres.'), 400
-    if role not in ('estudiante', 'docente') or provider_name not in ('groq', 'ollama'):
-        return jsonify(error='Asistente o proveedor no válido.'), 400
+    if role not in ('estudiante', 'docente') or provider_name not in ('groq', 'ollama') or rag_engine not in ('naive', 'graph'):
+        return jsonify(error='Asistente, proveedor o motor RAG no válido.'), 400
 
-    key = (role, provider_name)
+    key = (role, provider_name, rag_engine)
     try:
         with _lock:
             force_mode = None
@@ -100,12 +102,13 @@ def chat():
             if route.scope is None:
                 _pending[key] = {'message': question, 'reason': 'ambito_no_claro'}
                 return jsonify(answer='¿La consulta es de pregrado o posgrado?', sources=[], routing='clarification')
-            rag = RAGService(provider=provider)
+            rag = (MultiDocumentGraphRAGService(provider=provider)
+                   if rag_engine == 'graph' else RAGService(provider=provider))
             result = rag.ask(question, route.scope, assistant_type=role)
             if route.reason in ('ambito_explicito', 'ambito_del_contexto', 'aclarado_por_usuario'):
                 _last_scope[key] = route.scope
             return jsonify(answer=result['answer'], sources=result.get('sources', []),
-                           warning=result.get('warning', ''), routing='documentary')
+                           warning=result.get('warning', ''), routing='documentary', rag_engine=rag_engine)
     except Exception as exc:
         app.logger.exception('Error de consulta LAIA')
         return jsonify(error=f'Error de consulta ({type(exc).__name__}). Revisa la terminal local.'), 500
@@ -116,9 +119,10 @@ def reset():
     payload = request.get_json(silent=True) or {}
     role = payload.get('role')
     provider_name = payload.get('provider')
-    if role not in ('estudiante', 'docente') or provider_name not in ('groq', 'ollama'):
+    rag_engine = payload.get('rag_engine', 'naive')
+    if role not in ('estudiante', 'docente') or provider_name not in ('groq', 'ollama') or rag_engine not in ('naive', 'graph'):
         return jsonify(error='Selección inválida.'), 400
-    key = (role, provider_name)
+    key = (role, provider_name, rag_engine)
     with _lock:
         assistant = _teacher_sessions.pop(key, None)
         if assistant:
